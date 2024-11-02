@@ -2,7 +2,7 @@
     <div class="iq-navbar-logo d-flex justify-content-between">
         <a href="index.html" class="header-logo">
             <img src="images/logo.png" class="img-fluid rounded" alt="">
-            <span>FinDash</span>
+            <span>SmartFireAlert</span>
         </a>
         <div class="iq-menu-bt align-self-center">
             <div class="wrapper-menu">
@@ -23,7 +23,7 @@
 
                 <li>
                     <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse"
-                        aria-expanded="false"><i class="lab la-wpforms iq-arrow-left"></i><span>Forms</span>
+                        aria-expanded="false"><i class="lab ri-sensor-line iq-arrow-left"></i><span>Sensor</span>
                     </a>
                 </li>
 
