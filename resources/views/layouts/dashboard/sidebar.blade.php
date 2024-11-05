@@ -14,23 +14,34 @@
     <div id="sidebar-scrollbar">
         <nav class="iq-sidebar-menu">
             <ul id="iq-sidebar-toggle" class="iq-menu">
-                <li class="active">
-                    <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse"
-                        aria-expanded="true"><span class="ripple rippleEffect"></span><i
-                            class="las la-home iq-arrow-left"></i><span>Dashboard</span>
-                    </a>
+                <li class="
+                @if (request()->url() == route('dashboard'))
+                    active
+                @endif
+                ">
+                    <a href="{{ route('dashboard') }}" class="iq-waves-effect"><span
+                            class="ripple rippleEffect"></span><i
+                            class="las la-home iq-arrow-left"></i><span>Dashboard</span></a>
                 </li>
 
-                <li>
-                    <a href="#forms" class="iq-waves-effect collapsed" data-toggle="collapse"
+                <li class="
+                @if (request()->url() == '#')
+                    active
+                @endif
+                ">
+                    <a href="#forms" class="iq-waves-effect collapsed"
                         aria-expanded="false"><i class="lab ri-sensor-line iq-arrow-left"></i><span>Sensor</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse"
+                <li class="
+                @if (request()->url() == route('users.index'))
+                    active
+                @endif
+                ">
+                    <a href="{{ route('users.index') }}" class="iq-waves-effect"
                         aria-expanded="false"><span class="ripple rippleEffect"></span><i
-                            class="las la-user-tie iq-arrow-left"></i><span>User</span>
+                            class="las la-user-tie iq-arrow-left"></i><span>Pengguna</span>
                     </a>
                 </li>
             </ul>
