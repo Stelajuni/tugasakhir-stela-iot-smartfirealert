@@ -18,7 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Users
-    Route::get('users', [UserController::class, 'index']) -> name('users.index');
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+
 });
 
 

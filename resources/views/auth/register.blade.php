@@ -19,6 +19,9 @@
                                 <h1 class="mb-0 text-center">Sign Up</h1>
                                 <p class="text-center text-dark">Enter your email address and password to access admin
                                     panel.</p>
+
+                                @include('layouts.dashboard.alerts.danger-alert')
+
                                 <form class="mt-4" action="{{ route('register') }}" method="POST">
                                     @csrf
 
