@@ -12,12 +12,12 @@
 
     <!-- Wrapper Start -->
     <div class="wrapper">
-
         <!-- Sidebar  -->
         @include('layouts.dashboard.sidebar')
 
         <!-- TOP Nav Bar -->
         @include('layouts.dashboard.header')
+
         <!-- TOP Nav Bar END -->
 
         <!-- Page Content  -->
@@ -36,7 +36,8 @@
     <!-- Optional JavaScript -->
     @include('layouts.dashboard._foot')
 
-    @stack('scripts')
+    @stack ('scripts')
+
 </body>
 
 </html>
