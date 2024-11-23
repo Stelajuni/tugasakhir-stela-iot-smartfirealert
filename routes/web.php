@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FlameDataController;
 use App\Http\Controllers\MQ5DataController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -24,5 +25,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('mq5', [MQ5DataController::class, 'latest_mq5']) -> name('latest_mq5');
+Route::get('flame', [FlameDataController::class, 'latest_flame']) -> name('latest_flame');
 
 require __DIR__.'/auth.php';

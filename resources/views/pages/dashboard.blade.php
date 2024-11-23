@@ -19,7 +19,7 @@
                 </div>
                 <div class="iq-card-body">
                     <div class="table-responsive">
-                        <table id="kebakaran-table" class="table table-striped table-bordered mt-4" role="grid"
+                        <table id="flame-table" class="table table-striped table-bordered mt-4" role="grid"
                             aria-describedby="user-list-page-info">
                             <thead>
                                 <tr>
@@ -28,7 +28,7 @@
                                     <th>Created_at</th>
                                 </tr>
                             </thead>
-                            <tbody id="kebakaran-table-body">
+                            <tbody id="flame-table-body">
                                 {{-- Data akan dimasukkan secara dinamis --}}
                             </tbody>
                         </table>
@@ -116,12 +116,12 @@
 
 @push('scripts')
     <script>
-        async function fetchRainData() {
+        async function fetchFlameData() {
             try {
-                const response = await fetch("{{ route('latest_rain') }}");
+                const response = await fetch("{{ route('latest_flame') }}");
                 if (response.ok) {
                     const data = await response.json();
-                    updateRainTable(data);
+                    updateFlameTable(data);
                 } else {
                     console.error('Network response was not ok', response.statusText);
                 }
@@ -130,15 +130,15 @@
             }
         }
 
-        function updateRainTable(data) {
-            const tableBody = document.getElementById('rain-table-body');
+        function updateFlameTable(data) {
+            const tableBody = document.getElementById('flame-table-body');
             // Clear existing rows
             tableBody.innerHTML = '';
 
             // Insert new row
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${data.nilai_rain !== null ? data.nilai_rain : 'N/A'}</td>
+                <td>${data.nilai_flame !== null ? data.nilai_flame : 'N/A'}</td>
                 <td>${data.status}</td>
                 <td>${data.created_at}</td>
             `;
@@ -146,9 +146,10 @@
         }
 
         // Fetch data every 3 seconds
-        setInterval(fetchRainData, 3000);
+        setInterval(fetchFlameData, 3000);
 
         // Initial fetch
-        fetchRainData();
+        fetchFlameData();
     </script>
 @endpush
+
