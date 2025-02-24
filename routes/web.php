@@ -4,6 +4,7 @@ use App\Http\Controllers\FlameDataController;
 use App\Http\Controllers\MQ5DataController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SensorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,5 +27,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('mq5', [MQ5DataController::class, 'latest_mq5']) -> name('latest_mq5');
 Route::get('flame', [FlameDataController::class, 'latest_flame']) -> name('latest_flame');
+
+Route::get('sensor', [SensorController::class, 'sensor']) -> name('pages.sensor');
 
 require __DIR__.'/auth.php';

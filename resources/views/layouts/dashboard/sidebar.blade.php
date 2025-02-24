@@ -25,11 +25,11 @@
                 </li>
 
                 <li class="
-                @if (request()->url() == '#')
+                @if (request()->url() == route('pages.sensor'))
                     active
                 @endif
                 ">
-                    <a href="#forms" class="iq-waves-effect collapsed"
+                    <a href="{{ route('pages.sensor')}}" class="iq-waves-effect collapsed"
                         aria-expanded="false"><i class="lab ri-sensor-line iq-arrow-left"></i><span>Sensor</span>
                     </a>
                 </li>
