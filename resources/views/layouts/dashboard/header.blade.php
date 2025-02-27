@@ -8,8 +8,8 @@
                 </div>
                 <div class="iq-navbar-logo d-flex justify-content-between ml-3">
                     <a href="index.html" class="header-logo">
-                        <img src="images/logo.png" class="img-fluid rounded" alt="">
-                        <span>FinDash</span>
+                        {{-- <img src="images/logo.png" class="img-fluid rounded" alt=""> --}}
+                        <span>SmartFireAlert</span>
                     </a>
                 </div>
             </div>
