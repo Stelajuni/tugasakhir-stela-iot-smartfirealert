@@ -55,6 +55,62 @@
 @endsection
 
 @push('scripts')
+<script>
+    function formatDate(dateString) {
+        if (!dateString) return '-';
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return '-';
+
+        return date.toLocaleString('id-ID', {
+            day: '2-digit', month: 'short', year: 'numeric',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false
+        }).replace(/\./g, ':');
+    }
+
+    async function fetchSensorData() {
+        try {
+            const response = await fetch("{{ route('latest_sensors') }}");
+            if (response.ok) {
+                const data = await response.json();
+                updateFlameTable(data.flame);
+                updateGasTable(data.mq5);
+            } else {
+                console.error('Error fetching sensor data:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    function updateFlameTable(data) {
+        const tableBody = document.getElementById('flame-table-body');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${data.nilai !== null ? data.nilai : 'N/A'}</td>
+                <td>${data.keterangan ?? 'Tidak diketahui'}</td>
+                <td>${formatDate(data.created_at)}</td>
+            </tr>
+        `;
+    }
+
+    function updateGasTable(data) {
+        const tableBody = document.getElementById('gas-table-body');
+        tableBody.innerHTML = `
+            <tr>
+                <td>${data.nilai !== null ? data.nilai : 'N/A'}</td>
+                <td>${data.keterangan ?? 'Tidak diketahui'}</td>
+                <td>${formatDate(data.created_at)}</td>
+            </tr>
+        `;
+    }
+
+    setInterval(fetchSensorData, 3000);
+    fetchSensorData();
+</script>
+@endpush
+
+{{-- @push('scripts')
     <script>
         async function fetchFlameData() {
             try {
@@ -155,4 +211,4 @@
         // Initial fetch
         fetchGasData();
     </script>
-@endpush
+@endpush --}}

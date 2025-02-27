@@ -27,7 +27,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('mq5', [MQ5DataController::class, 'latest_mq5']) -> name('latest_mq5');
 Route::get('flame', [FlameDataController::class, 'latest_flame']) -> name('latest_flame');
+Route::get('/latest_sensors', [SensorController::class, 'latest_sensors'])->name('latest_sensors');
+
 
 Route::get('sensor', [SensorController::class, 'sensor']) -> name('pages.sensor');
+
 
 require __DIR__.'/auth.php';

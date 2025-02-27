@@ -3,64 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Sensor;
+use App\Models\FlameSensor;
+use App\Models\MQSensor;
 
 class SensorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Method untuk menampilkan halaman sensor
     public function sensor()
     {
-
-        return view('pages.sensor');
+        return view('pages.sensor'); // Pastikan file ini ada di resources/views/pages/sensor.blade.php
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // Method untuk mengambil data sensor terbaru dalam bentuk JSON
+    public function latest_sensors()
     {
-        //
-    }
+        // Ambil data terbaru dari database
+        $latestFlameData = FlameSensor::latest()->first();
+        $latestMQ5Data = MQSensor::latest()->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json([
+            'flame' => [
+                'nilai' => $latestFlameData ? $latestFlameData->nilai_flame : null,
+                'keterangan' => $latestFlameData ? ($latestFlameData->nilai_flame > 0 ? 'Kebakaran' : 'Aman') : 'Data tidak tersedia',
+                'created_at' => $latestFlameData ? $latestFlameData->created_at : null,
+            ],
+            'mq5' => [
+                'nilai' => $latestMQ5Data ? $latestMQ5Data->nilai_gas : null,
+                'keterangan' => $latestMQ5Data ? ($latestMQ5Data->nilai_gas > 300 ? 'Gas Berbahaya' : 'Aman') : 'Data tidak tersedia',
+                'created_at' => $latestMQ5Data ? $latestMQ5Data->created_at : null,
+            ]
+        ]);
     }
 }
