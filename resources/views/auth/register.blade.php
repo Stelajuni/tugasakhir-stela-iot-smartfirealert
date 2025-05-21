@@ -105,7 +105,7 @@
                 padding: 12px;
                 border: 1px solid #ccc;
                 border-radius: 6px;
-                font-size: 16px;
+                font-size: 12px;
             }
 
             /* Tombol */
@@ -187,9 +187,6 @@
 
             <div class="sign-in-page-data">
                 <h1 class="mb-0 text-center">Sign Up</h1>
-                <p class="text-center text-dark">
-                    Enter your email address and password to access the admin panel.
-                </p>
 
                 @include('layouts.dashboard.alerts.danger-alert')
 
@@ -215,14 +212,6 @@
                         <input name="password_confirmation" type="password" class="form-control mb-0"
                             id="password_confirmation" placeholder="Password">
                     </div>
-                    <div class="d-inline-block w-100">
-                        <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">
-                                I accept <a href="#">Terms and Conditions</a>
-                            </label>
-                        </div>
-                    </div>
                     <div class="sign-info text-center">
                         <button type="submit" class="btn-primary d-block w-100 mb-2">Sign Up</button>
                         <span class="text-dark d-inline-block line-height-2">
@@ -232,7 +221,6 @@
                 </form>
             </div>
         </div>
-
 
     </section>
     <!-- Sign in END -->

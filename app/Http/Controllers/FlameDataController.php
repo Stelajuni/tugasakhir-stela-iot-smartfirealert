@@ -11,7 +11,7 @@ class FlameDataController extends Controller
         $latestFlameData = FlameSensor::latest()->first();
         return response()->json([
             'nilai_flame' => $latestFlameData ? $latestFlameData->nilai_flame : null,
-            'status' => $latestFlameData ? ($latestFlameData->nilai_flame ? 'Kebakaran' : 'Tidak Kebakaran') : 'data tidak tersedia',
+            'status' => $latestFlameData ? ($latestFlameData->nilai_flame ? 'Kebakaran, Alarm Nyala' : 'Tidak Kebakaran') : 'data tidak tersedia',
             'created_at' => $latestFlameData ? $latestFlameData->created_at->format('d M Y, H:i:s') : null,
         ]);
     }
