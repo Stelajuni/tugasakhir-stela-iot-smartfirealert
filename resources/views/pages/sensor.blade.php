@@ -85,6 +85,7 @@
 
     function updateFlameTable(data) {
         const tableBody = document.getElementById('flame-table-body');
+        console.log(data,formatDate(data.created_at));
         tableBody.innerHTML = `
             <tr>
                 <td>${data.nilai !== null ? data.nilai : 'N/A'}</td>

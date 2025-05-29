@@ -43,6 +43,22 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script>
         let chartGas;
+        let mq5sensor = @json($MQ5);
+        console.log(mq5sensor);
+
+        function initdata() {
+            mq5sensor.forEach(data => {
+                let date = new Date(data.created_at).getTime();
+                date += 7 * 3600 * 1000;
+                const value = data.value;
+                const point = [date, value * 1]; // Misalnya, Anda mengalikan suhu dengan 10
+                const series = chartGas.series[0];
+                const shift = series.data.length > 20; // Shift if the series is longer than 20
+
+                // Add the point
+                chartGas.series[0].addPoint(point, true, shift);
+            });
+        }
         async function requestData() {
             try {
                 const result = await fetch("{{ route('latest_mq5') }}");
@@ -52,9 +68,9 @@
 
                     // Pastikan data yang diterima sesuai dengan yang diharapkan
                     if ((data.created_at != null) && (data.nilai_gas != null)) {
-                        const date = new Date(data.created_at).getTime();
+                        let date = new Date(data.created_at).getTime();
+                        date += 7 * 3600 * 1000;
                         const value = data.nilai_gas;
-
                         const point = [date, value * 1]; // Misalnya, Anda mengalikan suhu dengan 10
                         const series = chartGas.series[0];
                         const shift = series.data.length > 20; // Shift if the series is longer than 20
@@ -66,7 +82,7 @@
                     }
 
                     // Call it again after one second
-                    setTimeout(requestData, 5000);
+                    setTimeout(requestData, 2000);
                 } else {
                     console.error('Network response was not ok', result.statusText);
                 }
@@ -92,8 +108,7 @@
                 },
                 xAxis: {
                     type: 'datetime',
-                    tickPixelInterval: 150,
-                    maxZoom: 20 * 1000
+                    tickPixelInterval: 1000
                 },
                 yAxis: {
                     minPadding: 0.2,
@@ -105,9 +120,12 @@
                 },
                 series: [{
                     name: 'MQ5',
+                    pointStart: Date.now(),
+                    pointInterval: 1000,
                     data: []
                 }]
             });
+            initdata();
         });
     </script>
 @endpush
@@ -136,7 +154,7 @@
             // Insert new row
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${data.nilai_flame !== null ? data.nilai_flame : 'N/A'}</td>
+                <td>${data.nilai_flame_sensors !== null ? data.nilai_flame_sensors : 'N/A'}</td>
                 <td>${data.status}</td>
                 <td>${data.created_at}</td>
             `;
@@ -150,4 +168,3 @@
         fetchFlameData();
     </script>
 @endpush
-

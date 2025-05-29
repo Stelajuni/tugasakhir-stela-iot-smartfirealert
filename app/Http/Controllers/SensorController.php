@@ -23,13 +23,13 @@ class SensorController extends Controller
 
         return response()->json([
             'flame' => [
-                'nilai' => $latestFlameData ? $latestFlameData->nilai_flame : null,
-                'keterangan' => $latestFlameData ? ($latestFlameData->nilai_flame > 0 ? 'Kebakaran, Alarm Menyala' : 'Aman, Alarm Mati') : 'Data tidak tersedia',
+                'nilai' => $latestFlameData ? $latestFlameData->nilai_flame_sensors : null,
+                'keterangan' => $latestFlameData ? ($latestFlameData->nilai_flame_sensors > 0 ? 'Kebakaran, Alarm Menyala' : 'Aman, Alarm Mati') : 'Data tidak tersedia',
                 'created_at' => $latestFlameData ? $latestFlameData->created_at : null,
             ],
             'mq5' => [
-                'nilai' => $latestMQ5Data ? $latestMQ5Data->nilai_gas : null,
-                'keterangan' => $latestMQ5Data ? ($latestMQ5Data->nilai_gas > 300 ? 'Gas Berbahaya, Motor Berputar' : 'Aman, Motor Tidak Berputar') : 'Data tidak tersedia',
+                'nilai' => $latestMQ5Data ? $latestMQ5Data->value : null,
+                'keterangan' => $latestMQ5Data ? ($latestMQ5Data->value > 300 ? 'Gas Berbahaya, Motor Berputar' : 'Aman, Motor Tidak Berputar') : 'Data tidak tersedia',
                 'created_at' => $latestMQ5Data ? $latestMQ5Data->created_at : null,
             ]
         ]);

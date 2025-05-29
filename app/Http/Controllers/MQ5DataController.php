@@ -7,31 +7,25 @@ use App\Models\MQSensor;
 
 class MQ5DataController extends Controller
 {
-    public function latest_mq5(){
-        $latestMQ5Data = MQSensor::latest()->first();
-        return response()->json([
-            'nilai_gas' => $latestMQ5Data ? $latestMQ5Data->nilai_gas : null,
-            'created_at' => $latestMQ5Data ? $latestMQ5Data->created_at : null,
-        ]);
+    public function store(Request $request) {
+    $validated = $request->validate([
+        'nilai_gas' => 'required|numeric',
+    ]);
+
+    $mq = new MQSensor();
+    $mq->value = $validated['nilai_gas']; // ganti disini
+    $mq->save();
+
+    return response()->json(['message' => 'Data gas berhasil disimpan.'], 201);
     }
 
-    // public function latest_mq5() {
-    //     $latestMQ5Data = MQSensor::orderBy('id', 'desc')->first();
+    public function latest_mq5(){
+    $latestMQ5Data = MQSensor::latest()->first();
+    return response()->json([
+        'nilai_gas' => $latestMQ5Data ? $latestMQ5Data->value : null,
+        'created_at' => $latestMQ5Data ? $latestMQ5Data->created_at : null,
+    ]);
+}
 
-    //     if (!$latestMQ5Data) {
-    //         return response()->json([
-    //             'error' => 'No data available in MQSensor table',
-    //         ]);
-    //     }
 
-    //     // Ambil nilai_gas, pastikan decimal
-    //     $nilai_gas = $latestMQ5Data->nilai_gas !== null
-    //         ? round((float) $latestMQ5Data->nilai_gas, 2)
-    //         : 0.00;
-
-    //     return response()->json([
-    //         'nilai_gas' => $nilai_gas,
-    //         'created_at' => $latestMQ5Data->created_at,
-    //     ]);
-    // }
 }
