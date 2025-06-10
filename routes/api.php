@@ -3,6 +3,7 @@
 use App\Http\Controllers\FlameDataController;
 use App\Http\Controllers\MQ5DataController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,4 @@ Route::group(['as' => 'api.'], function () {
 
 Route::post('/flame', [FlameDataController::class, 'store']);
 Route::post('/mq5', [MQ5DataController::class, 'store']);
-
+Route::post('/notification', [NotificationController::class, 'send']);
