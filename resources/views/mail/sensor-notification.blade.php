@@ -309,12 +309,14 @@
               <!-- START MAIN CONTENT AREA -->
               <tr>
                 <td class="wrapper">
-                  <p>Hi there</p>
-                  <p>Terjadi kebocoran gas LPG {{$gas}} ppm, valve regulator terbuka, alarm berbunyi.</p>
+                  <p>Hallo User!!</p>
+                 @if ($gas>407)
+                      <p>Terjadi kebocoran gas {{$gas}} LPG ppm, valve regulator terbuka, alarm berbunyi.</p>
+                  @endif
                   @if ($api==1)
                       <p>Terjadi kebakaran, valve regulator terbuka, alarm berbunyi.</p>
                   @endif
-                  <p>Good luck! Hope it works.</p>
+                  <p>Cek Keadaan Sekitar dan Pastikan Aman. Terimakasih.</p>
                 </td>
               </tr>
 
